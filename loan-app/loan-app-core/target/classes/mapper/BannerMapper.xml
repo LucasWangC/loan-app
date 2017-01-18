@@ -1,0 +1,20 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.BannerDao">
+
+    <resultMap id="bannerResultMap" type="com.loan.common.model.Banner">
+        <id property="id" column="id" />
+        <result property="type" column="type" />
+        <result property="name" column="name" />
+        <result property="link" column="link" />
+        <result property="picPath" column="pic_path" />
+    </resultMap>
+
+    <!--查询banner信息-->
+    <select id="findBannerByDisabled" resultMap="bannerResultMap">
+        select id,TYPE ,NAME ,link,pic_path
+        from dw_banner
+        where disabled = #{type}
+    </select>
+
+</mapper>

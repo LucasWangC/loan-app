@@ -1,0 +1,501 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.BusinessDao">
+
+    <resultMap id="businessResultMap" type="com.loan.common.model.Business">
+        <id property="id" column="id" />
+        <result property="titleType" column="title_type" />
+        <result property="indexOrder" column="index_order" />
+        <result property="isIndex" column="is_index" />
+        <result property="linkType" column="link_type" />
+        <result property="linkPath" column="link_path" />
+        <result property="iconPath" column="icon_path" />
+        <result property="titleBig" column="title_big" />
+        <result property="titleSmall" column="title_small" />
+        <result property="guideWord" column="guide_word" />
+        <result property="channelApr" column="channel_apr" />
+        <result property="channelDesc" column="channel_desc" />
+        <result property="channelLevel" column="channel_level" />
+        <result property="channelTag" column="channel_tag" />
+        <result property="cornerPath" column="corner_path" />
+        <result property="clickTotal" column="click_total" />
+        <result property="createTime" column="create_time" />
+        <result property="createUser" column="create_user" />
+        <result property="createIp" column="create_ip" />
+        <result property="extend1" column="extend_1" />
+        <result property="extend2" column="extend_2" />
+        <result property="extend3" column="extend_3" />
+        <result property="extend4" column="extend_4" />
+        <result property="extend5" column="extend_5" />
+    </resultMap>
+
+    <sql id="selectClause">
+        `id`, `title_type`, `index_order`, `is_index`, `link_type`, `link_path`, `icon_path`, `title_big`, `title_small`, `guide_word`, `channel_apr`, `channel_desc`, `channel_level`, `channel_tag`, `corner_path`, `click_total`, `create_time`, `create_user`, `create_ip`, `extend_1`, `extend_2`, `extend_3`, `extend_4`, `extend_5`
+    </sql>
+
+    <sql id="whereClause">
+        <if test="id != null">
+            AND `id` = #{id}
+        </if>
+        <if test="titleType != null">
+            AND `title_type` = #{titleType}
+        </if>
+        <if test="indexOrder != null">
+            AND `index_order` = #{indexOrder}
+        </if>
+        <if test="isIndex != null">
+            AND `is_index` = #{isIndex}
+        </if>
+        <if test="linkType != null">
+            AND `link_type` = #{linkType}
+        </if>
+        <if test="linkPath != null">
+            AND `link_path` = #{linkPath}
+        </if>
+        <if test="iconPath != null">
+            AND `icon_path` = #{iconPath}
+        </if>
+        <if test="titleBig != null">
+            AND `title_big` = #{titleBig}
+        </if>
+        <if test="titleSmall != null">
+            AND `title_small` = #{titleSmall}
+        </if>
+        <if test="guideWord != null">
+            AND `guide_word` = #{guideWord}
+        </if>
+        <if test="channelApr != null">
+            AND `channel_apr` = #{channelApr}
+        </if>
+        <if test="channelDesc != null">
+            AND `channel_desc` = #{channelDesc}
+        </if>
+        <if test="channelLevel != null">
+            AND `channel_level` = #{channelLevel}
+        </if>
+        <if test="channelTag != null">
+            AND `channel_tag` = #{channelTag}
+        </if>
+        <if test="cornerPath != null">
+            AND `corner_path` = #{cornerPath}
+        </if>
+        <if test="clickTotal != null">
+            AND `click_total` = #{clickTotal}
+        </if>
+        <if test="createTime != null">
+            AND `create_time` = #{createTime}
+        </if>
+        <if test="createUser != null">
+            AND `create_user` = #{createUser}
+        </if>
+        <if test="createIp != null">
+            AND `create_ip` = #{createIp}
+        </if>
+        <if test="extend1 != null">
+            AND `extend_1` = #{extend1}
+        </if>
+        <if test="extend2 != null">
+            AND `extend_2` = #{extend2}
+        </if>
+        <if test="extend3 != null">
+            AND `extend_3` = #{extend3}
+        </if>
+        <if test="extend4 != null">
+            AND `extend_4` = #{extend4}
+        </if>
+        <if test="extend5 != null">
+            AND `extend_5` = #{extend5}
+        </if>
+    </sql>
+
+    <sql id="pageConditionWhereClause">
+        <if test="query.id != null">
+            AND `id` = #{query.id}
+        </if>
+        <if test="query.titleType != null">
+            AND `title_type` = #{query.titleType}
+        </if>
+        <if test="query.indexOrder != null">
+            AND `index_order` = #{query.indexOrder}
+        </if>
+        <if test="query.isIndex != null">
+            AND `is_index` = #{query.isIndex}
+        </if>
+        <if test="query.linkType != null">
+            AND `link_type` = #{query.linkType}
+        </if>
+        <if test="query.linkPath != null">
+            AND `link_path` = #{query.linkPath}
+        </if>
+        <if test="query.iconPath != null">
+            AND `icon_path` = #{query.iconPath}
+        </if>
+        <if test="query.titleBig != null">
+            AND `title_big` = #{query.titleBig}
+        </if>
+        <if test="query.titleSmall != null">
+            AND `title_small` = #{query.titleSmall}
+        </if>
+        <if test="query.guideWord != null">
+            AND `guide_word` = #{query.guideWord}
+        </if>
+        <if test="query.channelApr != null">
+            AND `channel_apr` = #{query.channelApr}
+        </if>
+        <if test="query.channelDesc != null">
+            AND `channel_desc` = #{query.channelDesc}
+        </if>
+        <if test="query.channelLevel != null">
+            AND `channel_level` = #{query.channelLevel}
+        </if>
+        <if test="query.channelTag != null">
+            AND `channel_tag` = #{query.channelTag}
+        </if>
+        <if test="query.cornerPath != null">
+            AND `corner_path` = #{query.cornerPath}
+        </if>
+        <if test="query.clickTotal != null">
+            AND `click_total` = #{query.clickTotal}
+        </if>
+        <if test="query.createTime != null">
+            AND `create_time` = #{query.createTime}
+        </if>
+        <if test="query.createUser != null">
+            AND `create_user` = #{query.createUser}
+        </if>
+        <if test="query.createIp != null">
+            AND `create_ip` = #{query.createIp}
+        </if>
+        <if test="query.extend1 != null">
+            AND `extend_1` = #{query.extend1}
+        </if>
+        <if test="query.extend2 != null">
+            AND `extend_2` = #{query.extend2}
+        </if>
+        <if test="query.extend3 != null">
+            AND `extend_3` = #{query.extend3}
+        </if>
+        <if test="query.extend4 != null">
+            AND `extend_4` = #{query.extend4}
+        </if>
+        <if test="query.extend5 != null">
+            AND `extend_5` = #{query.extend5}
+        </if>
+    </sql>
+
+    <sql id="updateClause">
+        <if test="id != null">
+            `id` = #{id},
+        </if>
+        <if test="titleType != null">
+            `title_type` = #{titleType},
+        </if>
+        <if test="indexOrder != null">
+            `index_order` = #{indexOrder},
+        </if>
+        <if test="isIndex != null">
+            `is_index` = #{isIndex},
+        </if>
+        <if test="linkType != null">
+            `link_type` = #{linkType},
+        </if>
+        <if test="linkPath != null">
+            `link_path` = #{linkPath},
+        </if>
+        <if test="iconPath != null">
+            `icon_path` = #{iconPath},
+        </if>
+        <if test="titleBig != null">
+            `title_big` = #{titleBig},
+        </if>
+        <if test="titleSmall != null">
+            `title_small` = #{titleSmall},
+        </if>
+        <if test="guideWord != null">
+            `guide_word` = #{guideWord},
+        </if>
+        <if test="channelApr != null">
+            `channel_apr` = #{channelApr},
+        </if>
+        <if test="channelDesc != null">
+            `channel_desc` = #{channelDesc},
+        </if>
+        <if test="channelLevel != null">
+            `channel_level` = #{channelLevel},
+        </if>
+        <if test="channelTag != null">
+            `channel_tag` = #{channelTag},
+        </if>
+        <if test="cornerPath != null">
+            `corner_path` = #{cornerPath},
+        </if>
+        <if test="clickTotal != null">
+            `click_total` = #{clickTotal},
+        </if>
+        <if test="createTime != null">
+            `create_time` = #{createTime},
+        </if>
+        <if test="createUser != null">
+            `create_user` = #{createUser},
+        </if>
+        <if test="createIp != null">
+            `create_ip` = #{createIp},
+        </if>
+        <if test="extend1 != null">
+            `extend_1` = #{extend1},
+        </if>
+        <if test="extend2 != null">
+            `extend_2` = #{extend2},
+        </if>
+        <if test="extend3 != null">
+            `extend_3` = #{extend3},
+        </if>
+        <if test="extend4 != null">
+            `extend_4` = #{extend4},
+        </if>
+        <if test="extend5 != null">
+            `extend_5` = #{extend5},
+        </if>
+    </sql>
+
+    <sql id="insertClause">
+        <if test="id != null">
+            `id`,
+        </if>
+        <if test="titleType != null">
+            `title_type`,
+        </if>
+        <if test="indexOrder != null">
+            `index_order`,
+        </if>
+        <if test="isIndex != null">
+            `is_index`,
+        </if>
+        <if test="linkType != null">
+            `link_type`,
+        </if>
+        <if test="linkPath != null">
+            `link_path`,
+        </if>
+        <if test="iconPath != null">
+            `icon_path`,
+        </if>
+        <if test="titleBig != null">
+            `title_big`,
+        </if>
+        <if test="titleSmall != null">
+            `title_small`,
+        </if>
+        <if test="guideWord != null">
+            `guide_word`,
+        </if>
+        <if test="channelApr != null">
+            `channel_apr`,
+        </if>
+        <if test="channelDesc != null">
+            `channel_desc`,
+        </if>
+        <if test="channelLevel != null">
+            `channel_level`,
+        </if>
+        <if test="channelTag != null">
+            `channel_tag`,
+        </if>
+        <if test="cornerPath != null">
+            `corner_path`,
+        </if>
+        <if test="clickTotal != null">
+            `click_total`,
+        </if>
+        <if test="createTime != null">
+            `create_time`,
+        </if>
+        <if test="createUser != null">
+            `create_user`,
+        </if>
+        <if test="createIp != null">
+            `create_ip`,
+        </if>
+        <if test="extend1 != null">
+            `extend_1`,
+        </if>
+        <if test="extend2 != null">
+            `extend_2`,
+        </if>
+        <if test="extend3 != null">
+            `extend_3`,
+        </if>
+        <if test="extend4 != null">
+            `extend_4`,
+        </if>
+        <if test="extend5 != null">
+            `extend_5`,
+        </if>
+    </sql>
+
+    <sql id="insertValues">
+        <if test="id != null">
+            #{id},
+        </if>
+        <if test="titleType != null">
+            #{titleType},
+        </if>
+        <if test="indexOrder != null">
+            #{indexOrder},
+        </if>
+        <if test="isIndex != null">
+            #{isIndex},
+        </if>
+        <if test="linkType != null">
+            #{linkType},
+        </if>
+        <if test="linkPath != null">
+            #{linkPath},
+        </if>
+        <if test="iconPath != null">
+            #{iconPath},
+        </if>
+        <if test="titleBig != null">
+            #{titleBig},
+        </if>
+        <if test="titleSmall != null">
+            #{titleSmall},
+        </if>
+        <if test="guideWord != null">
+            #{guideWord},
+        </if>
+        <if test="channelApr != null">
+            #{channelApr},
+        </if>
+        <if test="channelDesc != null">
+            #{channelDesc},
+        </if>
+        <if test="channelLevel != null">
+            #{channelLevel},
+        </if>
+        <if test="channelTag != null">
+            #{channelTag},
+        </if>
+        <if test="cornerPath != null">
+            #{cornerPath},
+        </if>
+        <if test="clickTotal != null">
+            #{clickTotal},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="createUser != null">
+            #{createUser},
+        </if>
+        <if test="createIp != null">
+            #{createIp},
+        </if>
+        <if test="extend1 != null">
+            #{extend1},
+        </if>
+        <if test="extend2 != null">
+            #{extend2},
+        </if>
+        <if test="extend3 != null">
+            #{extend3},
+        </if>
+        <if test="extend4 != null">
+            #{extend4},
+        </if>
+        <if test="extend5 != null">
+            #{extend5},
+        </if>
+    </sql>
+
+    <select id="findAll" resultMap="businessResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business
+    </select>
+
+    <select id="findIndexBusInfo" resultMap="businessResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business
+        WHERE title_type IN ('like','recommend') limit 0,6
+    </select>
+
+    <select id="findById" resultMap="businessResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business
+        where
+            `id` = #{id}
+    </select>
+
+    <select id="findByCondition" parameterType="com.loan.common.model.Business" resultMap="businessResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+    <select id="findPage" resultMap="businessResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business
+    </select>
+
+    <select id="findPageByCondition" parameterType="com.loan.common.model.Business"  resultMap="businessResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business
+        <where>
+            <include refid="pageConditionWhereClause" />
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.loan.common.model.Business">
+        update dw_business set
+        <trim suffix="" suffixOverrides=",">
+            <include refid="updateClause" />
+        </trim>
+        where
+                `id` = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.loan.common.model.Business">
+        insert into dw_business
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertClause"/>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertValues" />
+        </trim>
+    </insert>
+
+
+    <select id="count" parameterType="com.loan.common.model.Business" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business
+    </select>
+
+    <select id="countByCondition" parameterType="com.loan.common.model.Business" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+
+    <delete id="deleteById">
+        delete
+            from dw_business
+        where
+            `id` = #{id}
+
+    </delete>
+
+</mapper>

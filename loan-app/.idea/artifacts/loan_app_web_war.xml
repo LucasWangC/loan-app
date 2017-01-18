@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="loan-app-web:war">
+    <output-path>$PROJECT_DIR$/loan-app-web/target</output-path>
+    <root id="archive" name="loan-app-web.war">
+      <element id="artifact" artifact-name="loan-app-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.1.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+        >
+    <!--配置可写数据源-->
+    <!--BoneCP configuration -->
+    <bean id="writeTargetDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClass" value="${BoneCP.driverClass}"/>
+        <!-- 相应驱动的jdbcUrl,你懂的 -->
+        <property name="jdbcUrl" value="${BoneCP.jdbcUrl}"/>
+        <!-- 数据库的用户名 -->
+        <property name="username" value="${BoneCP.username}"/>
+        <!-- 数据库的密码 -->
+        <property name="password" value="${BoneCP.password}"/>
+        <!-- 每个分区最大的连接数 -->
+        <property name="maxConnectionsPerPartition" value="${BoneCP.maxConnectionsPerPartition}"/>
+        <!-- 每个分区最小的连接数 -->
+        <property name="minConnectionsPerPartition" value="${BoneCP.minConnectionsPerPartition}"/>
+        <!-- 分区数 ，默认值2，最小1，推荐3-4，视应用而定-->
+        <property name="partitionCount" value="${BoneCP.partitionCount}"/>
+        <!-- 每次去拿数据库连接的时候一次性要拿几个,默认值：2 -->
+        <property name="acquireIncrement" value="${BoneCP.acquireIncrement}"/>
+        <!-- 缓存prepared statements的大小，默认值：0 -->
+        <property name="statementsCacheSize" value="${BoneCP.statementsCacheSize}"/>
+        <!-- 数据库在获取连接时使用的验证sql -->
+        <property name="initSQL" value="${BoneCP.initSQL}"/>
+        <!-- 打印SQL -->
+        <property name="logStatementsEnabled" value="${BoneCP.logStatementsEnabled}"/>
+        <!-- 检查数据库连接池中空闲连接的间隔时间-->
+        <property name="idleConnectionTestPeriodInMinutes" value="${BoneCP.idleConnectionTestPeriod}"/>
+        <!-- 连接池中未使用的链接最大存活时间-->
+        <property name="idleMaxAgeInMinutes" value="${BoneCP.idleMaxAge}"/>
+        <!-- 每个分区释放链接助理进程的数量-->
+        <property name="releaseHelperThreads" value="${BoneCP.releaseHelperThreads}"/>
+        <!--在做keep-alive的时候的SQL语句-->
+        <property name="connectionTestStatement" value="${BoneCP.connectionTestStatement}"/>
+        <!--如果设置为true，则会增加一个线程监控关闭连接时的情况，如果关闭时出现异常，则打出错误日志，主要用于debug。上线后记得关掉-->
+        <property name="closeConnectionWatch" value="${BoneCP.closeConnectionWatch}"/>
+        <!--在获取连接失败后，第二次参试前的延迟时间。-->
+        <property name="acquireRetryDelayInMs" value="${BoneCP.acquireRetryDelay}"/>
+        <!--在获取连接失败后的重试次数-->
+        <property name="acquireRetryAttempts" value="${BoneCP.acquireRetryAttempts}"/>
+        <!--如果设置为true，那么连接池不会自动创建最小连接数的链接，而是保持为空，直到有需求要获取连接-->
+        <property name="lazyInit" value="${BoneCP.lazyInit}"/>
+        <!--如果设置为true，则会保存该链接上的所有活动，以备下次重试的时候使用，这里指的活动是数据库操作-->
+        <property name="transactionRecoveryEnabled" value="${BoneCP.transactionRecoveryEnabled}"/>
+    </bean>
+
+
+    <!--配置只读数据源-->
+    <!--BoneCP configuration -->
+    <bean id="readOnlyTargetDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClass" value="${readOnly.BoneCP.driverClass}"/>
+        <!-- 相应驱动的jdbcUrl,你懂的 -->
+        <property name="jdbcUrl" value="${readOnly.BoneCP.jdbcUrl}"/>
+        <!-- 数据库的用户名 -->
+        <property name="username" value="${readOnly.BoneCP.username}"/>
+        <!-- 数据库的密码 -->
+        <property name="password" value="${readOnly.BoneCP.password}"/>
+        <!-- 每个分区最大的连接数 -->
+        <property name="maxConnectionsPerPartition" value="${readOnly.BoneCP.maxConnectionsPerPartition}"/>
+        <!-- 每个分区最小的连接数 -->
+        <property name="minConnectionsPerPartition" value="${readOnly.BoneCP.minConnectionsPerPartition}"/>
+        <!-- 分区数 ，默认值2，最小1，推荐3-4，视应用而定-->
+        <property name="partitionCount" value="${readOnly.BoneCP.partitionCount}"/>
+        <!-- 每次去拿数据库连接的时候一次性要拿几个,默认值：2 -->
+        <property name="acquireIncrement" value="${readOnly.BoneCP.acquireIncrement}"/>
+        <!-- 缓存prepared statements的大小，默认值：0 -->
+        <property name="statementsCacheSize" value="${readOnly.BoneCP.statementsCacheSize}"/>
+        <!-- 数据库在获取连接时使用的验证sql -->
+        <property name="initSQL" value="${readOnly.BoneCP.initSQL}"/>
+        <!-- 打印SQL -->
+        <property name="logStatementsEnabled" value="${readOnly.BoneCP.logStatementsEnabled}"/>
+        <!-- 检查数据库连接池中空闲连接的间隔时间-->
+        <property name="idleConnectionTestPeriodInMinutes" value="${readOnly.BoneCP.idleConnectionTestPeriod}"/>
+        <!-- 连接池中未使用的链接最大存活时间-->
+        <property name="idleMaxAgeInMinutes" value="${readOnly.BoneCP.idleMaxAge}"/>
+        <!-- 每个分区释放链接助理进程的数量-->
+        <property name="releaseHelperThreads" value="${readOnly.BoneCP.releaseHelperThreads}"/>
+        <!--在做keep-alive的时候的SQL语句-->
+        <property name="connectionTestStatement" value="${readOnly.BoneCP.connectionTestStatement}"/>
+        <!--如果设置为true，则会增加一个线程监控关闭连接时的情况，如果关闭时出现异常，则打出错误日志，主要用于debug。上线后记得关掉-->
+        <property name="closeConnectionWatch" value="${readOnly.BoneCP.closeConnectionWatch}"/>
+        <!--在获取连接失败后，第二次参试前的延迟时间。-->
+        <property name="acquireRetryDelayInMs" value="${readOnly.BoneCP.acquireRetryDelay}"/>
+        <!--在获取连接失败后的重试次数-->
+        <property name="acquireRetryAttempts" value="${readOnly.BoneCP.acquireRetryAttempts}"/>
+        <!--如果设置为true，那么连接池不会自动创建最小连接数的链接，而是保持为空，直到有需求要获取连接-->
+        <property name="lazyInit" value="${readOnly.BoneCP.lazyInit}"/>
+        <!--如果设置为true，则会保存该链接上的所有活动，以备下次重试的时候使用，这里指的活动是数据库操作-->
+        <property name="transactionRecoveryEnabled" value="${readOnly.BoneCP.transactionRecoveryEnabled}"/>
+    </bean>
+    <!--多数据源配置-->
+    <bean id="multipleDataSource" class="com.loan.common.dataSource.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="writeTargetDataSource"/>
+        <property name="targetDataSources">
+            <map>
+                <entry key="writeDataSource" value-ref="writeTargetDataSource"/>
+                <entry key="readOnlyDataSource" value-ref="readOnlyTargetDataSource"/>
+            </map>
+        </property>
+    </bean>
+    <!--数据源代理-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource">
+            <ref local="multipleDataSource"/>
+        </property>
+    </bean>
+    <!--事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--注释事务-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+</beans>
