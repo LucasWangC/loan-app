@@ -7,6 +7,7 @@ import com.loan.common.exception.LoanException;
 import com.loan.common.model.Banner;
 import com.loan.common.mybatis.Page;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -38,6 +39,6 @@ public interface AppInfoService {
      * 更新平台点击量
      * @param busId
      */
-    public void saveBusClick(Long busId) throws LoanException;
+    public void saveBusClick(String busId,String deviceId,HttpServletRequest httpServletRequest) throws LoanException;
 
 }

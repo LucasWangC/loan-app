@@ -1,0 +1,286 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.BusinessVisitDao">
+
+    <resultMap id="businessVisitResultMap" type="com.loan.common.model.BusinessVisit">
+        <id property="id" column="id" />
+        <result property="busId" column="bus_id" />
+        <result property="pageUrl" column="page_url" />
+        <result property="deviceId" column="device_id" />
+        <result property="addtime" column="addtime" />
+        <result property="visitIp" column="visit_ip" />
+        <result property="extend1" column="extend1" />
+        <result property="extend2" column="extend2" />
+        <result property="extend3" column="extend3" />
+        <result property="extend4" column="extend4" />
+        <result property="extend5" column="extend5" />
+    </resultMap>
+
+    <sql id="selectClause">
+        `id`, `bus_id`, `page_url`, `device_id`, `addtime`, `visit_ip`, `extend1`, `extend2`, `extend3`, `extend4`, `extend5`
+    </sql>
+
+    <sql id="whereClause">
+        <if test="id != null">
+            AND `id` = #{id}
+        </if>
+        <if test="busId != null">
+            AND `bus_id` = #{busId}
+        </if>
+        <if test="pageUrl != null">
+            AND `page_url` = #{pageUrl}
+        </if>
+        <if test="deviceId != null">
+            AND `device_id` = #{deviceId}
+        </if>
+        <if test="addtime != null">
+            AND `addtime` = #{addtime}
+        </if>
+        <if test="visitIp != null">
+            AND `visit_ip` = #{visitIp}
+        </if>
+        <if test="extend1 != null">
+            AND `extend1` = #{extend1}
+        </if>
+        <if test="extend2 != null">
+            AND `extend2` = #{extend2}
+        </if>
+        <if test="extend3 != null">
+            AND `extend3` = #{extend3}
+        </if>
+        <if test="extend4 != null">
+            AND `extend4` = #{extend4}
+        </if>
+        <if test="extend5 != null">
+            AND `extend5` = #{extend5}
+        </if>
+    </sql>
+
+    <sql id="pageConditionWhereClause">
+        <if test="query.id != null">
+            AND `id` = #{query.id}
+        </if>
+        <if test="query.busId != null">
+            AND `bus_id` = #{query.busId}
+        </if>
+        <if test="query.pageUrl != null">
+            AND `page_url` = #{query.pageUrl}
+        </if>
+        <if test="query.deviceId != null">
+            AND `device_id` = #{query.deviceId}
+        </if>
+        <if test="query.addtime != null">
+            AND `addtime` = #{query.addtime}
+        </if>
+        <if test="query.visitIp != null">
+            AND `visit_ip` = #{query.visitIp}
+        </if>
+        <if test="query.extend1 != null">
+            AND `extend1` = #{query.extend1}
+        </if>
+        <if test="query.extend2 != null">
+            AND `extend2` = #{query.extend2}
+        </if>
+        <if test="query.extend3 != null">
+            AND `extend3` = #{query.extend3}
+        </if>
+        <if test="query.extend4 != null">
+            AND `extend4` = #{query.extend4}
+        </if>
+        <if test="query.extend5 != null">
+            AND `extend5` = #{query.extend5}
+        </if>
+    </sql>
+
+    <sql id="updateClause">
+        <if test="id != null">
+            `id` = #{id},
+        </if>
+        <if test="busId != null">
+            `bus_id` = #{busId},
+        </if>
+        <if test="pageUrl != null">
+            `page_url` = #{pageUrl},
+        </if>
+        <if test="deviceId != null">
+            `device_id` = #{deviceId},
+        </if>
+        <if test="addtime != null">
+            `addtime` = #{addtime},
+        </if>
+        <if test="visitIp != null">
+            `visit_ip` = #{visitIp},
+        </if>
+        <if test="extend1 != null">
+            `extend1` = #{extend1},
+        </if>
+        <if test="extend2 != null">
+            `extend2` = #{extend2},
+        </if>
+        <if test="extend3 != null">
+            `extend3` = #{extend3},
+        </if>
+        <if test="extend4 != null">
+            `extend4` = #{extend4},
+        </if>
+        <if test="extend5 != null">
+            `extend5` = #{extend5},
+        </if>
+    </sql>
+
+    <sql id="insertClause">
+        <if test="id != null">
+            `id`,
+        </if>
+        <if test="busId != null">
+            `bus_id`,
+        </if>
+        <if test="pageUrl != null">
+            `page_url`,
+        </if>
+        <if test="deviceId != null">
+            `device_id`,
+        </if>
+        <if test="addtime != null">
+            `addtime`,
+        </if>
+        <if test="visitIp != null">
+            `visit_ip`,
+        </if>
+        <if test="extend1 != null">
+            `extend1`,
+        </if>
+        <if test="extend2 != null">
+            `extend2`,
+        </if>
+        <if test="extend3 != null">
+            `extend3`,
+        </if>
+        <if test="extend4 != null">
+            `extend4`,
+        </if>
+        <if test="extend5 != null">
+            `extend5`,
+        </if>
+    </sql>
+
+    <sql id="insertValues">
+        <if test="id != null">
+            #{id},
+        </if>
+        <if test="busId != null">
+            #{busId},
+        </if>
+        <if test="pageUrl != null">
+            #{pageUrl},
+        </if>
+        <if test="deviceId != null">
+            #{deviceId},
+        </if>
+        <if test="addtime != null">
+            #{addtime},
+        </if>
+        <if test="visitIp != null">
+            #{visitIp},
+        </if>
+        <if test="extend1 != null">
+            #{extend1},
+        </if>
+        <if test="extend2 != null">
+            #{extend2},
+        </if>
+        <if test="extend3 != null">
+            #{extend3},
+        </if>
+        <if test="extend4 != null">
+            #{extend4},
+        </if>
+        <if test="extend5 != null">
+            #{extend5},
+        </if>
+    </sql>
+
+    <select id="findAll" resultMap="businessVisitResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_visit
+    </select>
+
+    <select id="findById" resultMap="businessVisitResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_visit
+        where
+            `id` = #{id}
+    </select>
+
+    <select id="findByCondition" parameterType="com.loan.common.model.BusinessVisit" resultMap="businessVisitResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_visit
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+    <select id="findPage" resultMap="businessVisitResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business_visit
+    </select>
+
+    <select id="findPageByCondition" parameterType="com.loan.common.model.BusinessVisit"  resultMap="businessVisitResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business_visit
+        <where>
+            <include refid="pageConditionWhereClause" />
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.loan.common.model.BusinessVisit">
+        update dw_business_visit set
+        <trim suffix="" suffixOverrides=",">
+            <include refid="updateClause" />
+        </trim>
+        where
+                `id` = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.loan.common.model.BusinessVisit">
+        insert into dw_business_visit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertClause"/>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertValues" />
+        </trim>
+    </insert>
+
+
+    <select id="count" parameterType="com.loan.common.model.BusinessVisit" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business_visit
+    </select>
+
+    <select id="countByCondition" parameterType="com.loan.common.model.BusinessVisit" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business_visit
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+
+    <delete id="deleteById">
+        delete
+            from dw_business_visit
+        where
+            `id` = #{id}
+
+    </delete>
+
+</mapper>

@@ -2,6 +2,7 @@ package com.loan.common.service.impl;
 
 import com.loan.common.dao.BannerDao;
 import com.loan.common.dao.BusinessDao;
+import com.loan.common.dao.BusinessVisitDao;
 import com.loan.common.dto.AppIndexDto;
 import com.loan.common.dto.BusinessDto;
 import com.loan.common.dto.IndexBussinessDto;
@@ -10,20 +11,23 @@ import com.loan.common.enums.LabelEnum;
 import com.loan.common.exception.LoanException;
 import com.loan.common.model.Banner;
 import com.loan.common.model.Business;
+import com.loan.common.model.BusinessVisit;
 import com.loan.common.mybatis.Page;
 import com.loan.common.service.AppInfoService;
 import com.loan.common.utils.ConstantUtil;
+import com.loan.common.utils.IpUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * FileName: com.loan.common.service.impl.AppInfoServiceImpl.java
- * Author: wangyingjie
+ * Author: lucasWang
  * Email: m13803851175@163.com
  * Date: 2016/12/29 15:56
  * Description:
@@ -40,6 +44,8 @@ public class AppInfoServiceImpl implements AppInfoService {
     private BannerDao userDao;
     @Autowired
     private BusinessDao businessDao;
+    @Autowired
+    private BusinessVisitDao businessVisitDao;
 
 
     @Override
@@ -52,7 +58,7 @@ public class AppInfoServiceImpl implements AppInfoService {
                 businessDto.setIconPath(business.getIconPath());
                 businessDto.setBusName(BusinessEnum.getlabelDesc(business.getChannelTag()));
                 businessDto.setFee(business.getChannelApr() * 100+"%");
-                businessDto.setIconPath(business.getIconPath());
+                businessDto.setCornerPath(business.getCornerPath());
                 businessDto.setShortWord(business.getChannelDesc());
                 businessDto.setLinkType(1);
                 businessDto.setLinkPath(business.getLinkPath());
@@ -98,15 +104,15 @@ public class AppInfoServiceImpl implements AppInfoService {
 
     @Override
     @Transactional(rollbackFor = {LoanException.class,RuntimeException.class})
-    public void saveBusClick(Long busId) throws LoanException{
-        Business business = businessDao.findById(busId);
-        if(business == null){
-            throw new LoanException("此平台不存在！");
-        }
-        business.setClickTotal(business.getClickTotal()+1);
-        long n = businessDao.updateById(business);
-        if(n<=0){
-            throw new LoanException("点击量更新失败！");
-        }
+    public void saveBusClick(String busId,String deviceId,HttpServletRequest request) throws LoanException{
+        logger.info("///////////////requestPageUrl="+request.getHeader("Referer")+"/////////////////////");
+        Long nowTime = System.currentTimeMillis()/1000;
+        BusinessVisit businessVisit = new BusinessVisit();
+        businessVisit.setDeviceId(deviceId);
+        businessVisit.setAddtime(nowTime);
+        businessVisit.setBusId(busId);
+        businessVisit.setVisitIp(IpUtils.getIpAddr(request));
+        businessVisit.setPageUrl(request.getHeader("Referer"));
+        businessVisitDao.save(businessVisit);
     }
 }

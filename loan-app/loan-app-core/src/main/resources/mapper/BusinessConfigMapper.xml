@@ -1,0 +1,190 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.BusinessConfigDao">
+
+    <resultMap id="businessConfigResultMap" type="com.loan.common.model.BusinessConfig">
+        <id property="id" column="id" />
+        <result property="busCode" column="bus_code" />
+        <result property="busKey" column="bus_key" />
+        <result property="isClose" column="is_close" />
+        <result property="addtime" column="addtime" />
+    </resultMap>
+
+    <sql id="selectClause">
+        `id`, `bus_code`, `bus_key`, `is_close`, `addtime`
+    </sql>
+
+    <sql id="whereClause">
+        <if test="id != null">
+            AND `id` = #{id}
+        </if>
+        <if test="busCode != null">
+            AND `bus_code` = #{busCode}
+        </if>
+        <if test="busKey != null">
+            AND `bus_key` = #{busKey}
+        </if>
+        <if test="isClose != null">
+            AND `is_close` = #{isClose}
+        </if>
+        <if test="addtime != null">
+            AND `addtime` = #{addtime}
+        </if>
+    </sql>
+
+    <sql id="pageConditionWhereClause">
+        <if test="query.id != null">
+            AND `id` = #{query.id}
+        </if>
+        <if test="query.busCode != null">
+            AND `bus_code` = #{query.busCode}
+        </if>
+        <if test="query.busKey != null">
+            AND `bus_key` = #{query.busKey}
+        </if>
+        <if test="query.isClose != null">
+            AND `is_close` = #{query.isClose}
+        </if>
+        <if test="query.addtime != null">
+            AND `addtime` = #{query.addtime}
+        </if>
+    </sql>
+
+    <sql id="updateClause">
+        <if test="id != null">
+            `id` = #{id},
+        </if>
+        <if test="busCode != null">
+            `bus_code` = #{busCode},
+        </if>
+        <if test="busKey != null">
+            `bus_key` = #{busKey},
+        </if>
+        <if test="isClose != null">
+            `is_close` = #{isClose},
+        </if>
+        <if test="addtime != null">
+            `addtime` = #{addtime},
+        </if>
+    </sql>
+
+    <sql id="insertClause">
+        <if test="id != null">
+            `id`,
+        </if>
+        <if test="busCode != null">
+            `bus_code`,
+        </if>
+        <if test="busKey != null">
+            `bus_key`,
+        </if>
+        <if test="isClose != null">
+            `is_close`,
+        </if>
+        <if test="addtime != null">
+            `addtime`,
+        </if>
+    </sql>
+
+    <sql id="insertValues">
+        <if test="id != null">
+            #{id},
+        </if>
+        <if test="busCode != null">
+            #{busCode},
+        </if>
+        <if test="busKey != null">
+            #{busKey},
+        </if>
+        <if test="isClose != null">
+            #{isClose},
+        </if>
+        <if test="addtime != null">
+            #{addtime},
+        </if>
+    </sql>
+
+    <select id="findAll" resultMap="businessConfigResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_config
+    </select>
+
+    <select id="findById" resultMap="businessConfigResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_config
+        where
+            `id` = #{id}
+    </select>
+
+    <select id="findByCondition" parameterType="com.loan.common.model.BusinessConfig" resultMap="businessConfigResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_business_config
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+    <select id="findPage" resultMap="businessConfigResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business_config
+    </select>
+
+    <select id="findPageByCondition" parameterType="com.loan.common.model.BusinessConfig"  resultMap="businessConfigResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_business_config
+        <where>
+            <include refid="pageConditionWhereClause" />
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.loan.common.model.BusinessConfig">
+        update dw_business_config set
+        <trim suffix="" suffixOverrides=",">
+            <include refid="updateClause" />
+        </trim>
+        where
+                `id` = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.loan.common.model.BusinessConfig">
+        insert into dw_business_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertClause"/>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertValues" />
+        </trim>
+    </insert>
+
+
+    <select id="count" parameterType="com.loan.common.model.BusinessConfig" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business_config
+    </select>
+
+    <select id="countByCondition" parameterType="com.loan.common.model.BusinessConfig" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_business_config
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+
+    <delete id="deleteById">
+        delete
+            from dw_business_config
+        where
+            `id` = #{id}
+
+    </delete>
+
+</mapper>

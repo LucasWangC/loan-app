@@ -1,0 +1,318 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.UserBorrowDao">
+
+    <resultMap id="userBorrowResultMap" type="com.loan.common.model.UserBorrow">
+        <id property="id" column="id" />
+        <result property="phoneNo" column="phone_no" />
+        <result property="businessCode" column="business_code" />
+        <result property="busUserid" column="bus_userId" />
+        <result property="busOrderNo" column="bus_order_no" />
+        <result property="busOrderMoney" column="bus_order_money" />
+        <result property="busOrderTime" column="bus_order_time" />
+        <result property="createTime" column="create_time" />
+        <result property="extend1" column="extend1" />
+        <result property="extend2" column="extend2" />
+        <result property="extend3" column="extend3" />
+        <result property="extend4" column="extend4" />
+        <result property="extend5" column="extend5" />
+    </resultMap>
+
+    <sql id="selectClause">
+        `id`, `phone_no`, `business_code`, `bus_userId`, `bus_order_no`, `bus_order_money`, `bus_order_time`, `create_time`, `extend1`, `extend2`, `extend3`, `extend4`, `extend5`
+    </sql>
+
+    <sql id="whereClause">
+        <if test="id != null">
+            AND `id` = #{id}
+        </if>
+        <if test="phoneNo != null">
+            AND `phone_no` = #{phoneNo}
+        </if>
+        <if test="businessCode != null">
+            AND `business_code` = #{businessCode}
+        </if>
+        <if test="busUserid != null">
+            AND `bus_userId` = #{busUserid}
+        </if>
+        <if test="busOrderNo != null">
+            AND `bus_order_no` = #{busOrderNo}
+        </if>
+        <if test="busOrderMoney != null">
+            AND `bus_order_money` = #{busOrderMoney}
+        </if>
+        <if test="busOrderTime != null">
+            AND `bus_order_time` = #{busOrderTime}
+        </if>
+        <if test="createTime != null">
+            AND `create_time` = #{createTime}
+        </if>
+        <if test="extend1 != null">
+            AND `extend1` = #{extend1}
+        </if>
+        <if test="extend2 != null">
+            AND `extend2` = #{extend2}
+        </if>
+        <if test="extend3 != null">
+            AND `extend3` = #{extend3}
+        </if>
+        <if test="extend4 != null">
+            AND `extend4` = #{extend4}
+        </if>
+        <if test="extend5 != null">
+            AND `extend5` = #{extend5}
+        </if>
+    </sql>
+
+    <sql id="pageConditionWhereClause">
+        <if test="query.id != null">
+            AND `id` = #{query.id}
+        </if>
+        <if test="query.phoneNo != null">
+            AND `phone_no` = #{query.phoneNo}
+        </if>
+        <if test="query.businessCode != null">
+            AND `business_code` = #{query.businessCode}
+        </if>
+        <if test="query.busUserid != null">
+            AND `bus_userId` = #{query.busUserid}
+        </if>
+        <if test="query.busOrderNo != null">
+            AND `bus_order_no` = #{query.busOrderNo}
+        </if>
+        <if test="query.busOrderMoney != null">
+            AND `bus_order_money` = #{query.busOrderMoney}
+        </if>
+        <if test="query.busOrderTime != null">
+            AND `bus_order_time` = #{query.busOrderTime}
+        </if>
+        <if test="query.createTime != null">
+            AND `create_time` = #{query.createTime}
+        </if>
+        <if test="query.extend1 != null">
+            AND `extend1` = #{query.extend1}
+        </if>
+        <if test="query.extend2 != null">
+            AND `extend2` = #{query.extend2}
+        </if>
+        <if test="query.extend3 != null">
+            AND `extend3` = #{query.extend3}
+        </if>
+        <if test="query.extend4 != null">
+            AND `extend4` = #{query.extend4}
+        </if>
+        <if test="query.extend5 != null">
+            AND `extend5` = #{query.extend5}
+        </if>
+    </sql>
+
+    <sql id="updateClause">
+        <if test="id != null">
+            `id` = #{id},
+        </if>
+        <if test="phoneNo != null">
+            `phone_no` = #{phoneNo},
+        </if>
+        <if test="businessCode != null">
+            `business_code` = #{businessCode},
+        </if>
+        <if test="busUserid != null">
+            `bus_userId` = #{busUserid},
+        </if>
+        <if test="busOrderNo != null">
+            `bus_order_no` = #{busOrderNo},
+        </if>
+        <if test="busOrderMoney != null">
+            `bus_order_money` = #{busOrderMoney},
+        </if>
+        <if test="busOrderTime != null">
+            `bus_order_time` = #{busOrderTime},
+        </if>
+        <if test="createTime != null">
+            `create_time` = #{createTime},
+        </if>
+        <if test="extend1 != null">
+            `extend1` = #{extend1},
+        </if>
+        <if test="extend2 != null">
+            `extend2` = #{extend2},
+        </if>
+        <if test="extend3 != null">
+            `extend3` = #{extend3},
+        </if>
+        <if test="extend4 != null">
+            `extend4` = #{extend4},
+        </if>
+        <if test="extend5 != null">
+            `extend5` = #{extend5},
+        </if>
+    </sql>
+
+    <sql id="insertClause">
+        <if test="id != null">
+            `id`,
+        </if>
+        <if test="phoneNo != null">
+            `phone_no`,
+        </if>
+        <if test="businessCode != null">
+            `business_code`,
+        </if>
+        <if test="busUserid != null">
+            `bus_userId`,
+        </if>
+        <if test="busOrderNo != null">
+            `bus_order_no`,
+        </if>
+        <if test="busOrderMoney != null">
+            `bus_order_money`,
+        </if>
+        <if test="busOrderTime != null">
+            `bus_order_time`,
+        </if>
+        <if test="createTime != null">
+            `create_time`,
+        </if>
+        <if test="extend1 != null">
+            `extend1`,
+        </if>
+        <if test="extend2 != null">
+            `extend2`,
+        </if>
+        <if test="extend3 != null">
+            `extend3`,
+        </if>
+        <if test="extend4 != null">
+            `extend4`,
+        </if>
+        <if test="extend5 != null">
+            `extend5`,
+        </if>
+    </sql>
+
+    <sql id="insertValues">
+        <if test="id != null">
+            #{id},
+        </if>
+        <if test="phoneNo != null">
+            #{phoneNo},
+        </if>
+        <if test="businessCode != null">
+            #{businessCode},
+        </if>
+        <if test="busUserid != null">
+            #{busUserid},
+        </if>
+        <if test="busOrderNo != null">
+            #{busOrderNo},
+        </if>
+        <if test="busOrderMoney != null">
+            #{busOrderMoney},
+        </if>
+        <if test="busOrderTime != null">
+            #{busOrderTime},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="extend1 != null">
+            #{extend1},
+        </if>
+        <if test="extend2 != null">
+            #{extend2},
+        </if>
+        <if test="extend3 != null">
+            #{extend3},
+        </if>
+        <if test="extend4 != null">
+            #{extend4},
+        </if>
+        <if test="extend5 != null">
+            #{extend5},
+        </if>
+    </sql>
+
+    <select id="findAll" resultMap="userBorrowResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_user_borrow
+    </select>
+
+    <select id="findById" resultMap="userBorrowResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_user_borrow
+        where
+            `id` = #{id}
+    </select>
+
+    <select id="findByCondition" parameterType="com.loan.common.model.UserBorrow" resultMap="userBorrowResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_user_borrow
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+    <select id="findPage" resultMap="userBorrowResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_user_borrow
+    </select>
+
+    <select id="findPageByCondition" parameterType="com.loan.common.model.UserBorrow"  resultMap="userBorrowResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_user_borrow
+        <where>
+            <include refid="pageConditionWhereClause" />
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.loan.common.model.UserBorrow">
+        update dw_user_borrow set
+        <trim suffix="" suffixOverrides=",">
+            <include refid="updateClause" />
+        </trim>
+        where
+                `id` = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.loan.common.model.UserBorrow">
+        insert into dw_user_borrow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertClause"/>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertValues" />
+        </trim>
+    </insert>
+
+
+    <select id="count" parameterType="com.loan.common.model.UserBorrow" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_user_borrow
+    </select>
+
+    <select id="countByCondition" parameterType="com.loan.common.model.UserBorrow" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_user_borrow
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+
+    <delete id="deleteById">
+        delete
+            from dw_user_borrow
+        where
+            `id` = #{id}
+
+    </delete>
+
+</mapper>

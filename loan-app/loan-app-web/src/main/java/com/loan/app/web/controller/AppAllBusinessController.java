@@ -6,7 +6,10 @@ import com.loan.common.mybatis.Page;
 import com.loan.common.service.AppInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Copyright (C), 2016-2020 助你贷
@@ -33,11 +36,14 @@ public class AppAllBusinessController {
     }
 
     @RequestMapping("increaseClick")
-    public Object increaseClick (Long busId) throws LoanException{
-        if(busId == null || busId<=0){
+    public Object increaseClick (String busId,String deviceId,HttpServletRequest httpServletRequest) throws LoanException{
+        if(StringUtils.isEmpty(busId)){
             throw new LoanException("平台ID不正确！");
         }
-        appInfoService.saveBusClick(busId);
+        if(StringUtils.isEmpty(deviceId)){
+            throw new LoanException("设备编号不能为空！");
+        }
+        appInfoService.saveBusClick(busId,deviceId,httpServletRequest);
         return BaseResponse.success();
     }
 }

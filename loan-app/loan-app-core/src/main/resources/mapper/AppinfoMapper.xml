@@ -1,0 +1,254 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loan.common.dao.AppinfoDao">
+
+    <resultMap id="appinfoResultMap" type="com.loan.common.model.Appinfo">
+        <id property="id" column="id" />
+        <result property="device" column="device" />
+        <result property="versionkey" column="versionKey" />
+        <result property="versioninfo" column="versionInfo" />
+        <result property="downloadurl" column="downloadUrl" />
+        <result property="addtime" column="addtime" />
+        <result property="addip" column="addip" />
+        <result property="forcestatus" column="forceStatus" />
+    </resultMap>
+
+    <sql id="selectClause">
+        `id`, `device`, `versionKey`, `versionInfo`, `downloadUrl`, `addtime`, `addip`, `forceStatus`
+    </sql>
+
+    <sql id="whereClause">
+        <if test="id != null">
+            AND `id` = #{id}
+        </if>
+        <if test="device != null">
+            AND `device` = #{device}
+        </if>
+        <if test="versionkey != null">
+            AND `versionKey` = #{versionkey}
+        </if>
+        <if test="versioninfo != null">
+            AND `versionInfo` = #{versioninfo}
+        </if>
+        <if test="downloadurl != null">
+            AND `downloadUrl` = #{downloadurl}
+        </if>
+        <if test="addtime != null">
+            AND `addtime` = #{addtime}
+        </if>
+        <if test="addip != null">
+            AND `addip` = #{addip}
+        </if>
+        <if test="forcestatus != null">
+            AND `forceStatus` = #{forcestatus}
+        </if>
+    </sql>
+
+    <sql id="pageConditionWhereClause">
+        <if test="query.id != null">
+            AND `id` = #{query.id}
+        </if>
+        <if test="query.device != null">
+            AND `device` = #{query.device}
+        </if>
+        <if test="query.versionkey != null">
+            AND `versionKey` = #{query.versionkey}
+        </if>
+        <if test="query.versioninfo != null">
+            AND `versionInfo` = #{query.versioninfo}
+        </if>
+        <if test="query.downloadurl != null">
+            AND `downloadUrl` = #{query.downloadurl}
+        </if>
+        <if test="query.addtime != null">
+            AND `addtime` = #{query.addtime}
+        </if>
+        <if test="query.addip != null">
+            AND `addip` = #{query.addip}
+        </if>
+        <if test="query.forcestatus != null">
+            AND `forceStatus` = #{query.forcestatus}
+        </if>
+    </sql>
+
+    <sql id="updateClause">
+        <if test="id != null">
+            `id` = #{id},
+        </if>
+        <if test="device != null">
+            `device` = #{device},
+        </if>
+        <if test="versionkey != null">
+            `versionKey` = #{versionkey},
+        </if>
+        <if test="versioninfo != null">
+            `versionInfo` = #{versioninfo},
+        </if>
+        <if test="downloadurl != null">
+            `downloadUrl` = #{downloadurl},
+        </if>
+        <if test="addtime != null">
+            `addtime` = #{addtime},
+        </if>
+        <if test="addip != null">
+            `addip` = #{addip},
+        </if>
+        <if test="forcestatus != null">
+            `forceStatus` = #{forcestatus},
+        </if>
+    </sql>
+
+    <sql id="insertClause">
+        <if test="id != null">
+            `id`,
+        </if>
+        <if test="device != null">
+            `device`,
+        </if>
+        <if test="versionkey != null">
+            `versionKey`,
+        </if>
+        <if test="versioninfo != null">
+            `versionInfo`,
+        </if>
+        <if test="downloadurl != null">
+            `downloadUrl`,
+        </if>
+        <if test="addtime != null">
+            `addtime`,
+        </if>
+        <if test="addip != null">
+            `addip`,
+        </if>
+        <if test="forcestatus != null">
+            `forceStatus`,
+        </if>
+    </sql>
+
+    <sql id="insertValues">
+        <if test="id != null">
+            #{id},
+        </if>
+        <if test="device != null">
+            #{device},
+        </if>
+        <if test="versionkey != null">
+            #{versionkey},
+        </if>
+        <if test="versioninfo != null">
+            #{versioninfo},
+        </if>
+        <if test="downloadurl != null">
+            #{downloadurl},
+        </if>
+        <if test="addtime != null">
+            #{addtime},
+        </if>
+        <if test="addip != null">
+            #{addip},
+        </if>
+        <if test="forcestatus != null">
+            #{forcestatus},
+        </if>
+    </sql>
+
+    <select id="findAll" resultMap="appinfoResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_appinfo
+    </select>
+
+    <select id="findById" resultMap="appinfoResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_appinfo
+        where
+            `id` = #{id}
+    </select>
+
+    <select id="findByCondition" parameterType="com.loan.common.model.Appinfo" resultMap="appinfoResultMap">
+        select
+            <include refid="selectClause" />
+        from dw_appinfo
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+    <select id="findPage" resultMap="appinfoResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_appinfo
+    </select>
+
+    <select id="findAndroidVersion" resultMap="appinfoResultMap">
+        SELECT
+        <include refid="selectClause" />
+        FROM dw_appinfo
+        WHERE device = 1
+        ORDER BY id DESC LIMIT 1;
+    </select>
+
+    <select id="findIOSVersion" resultMap="appinfoResultMap">
+        SELECT
+        <include refid="selectClause" />
+        FROM dw_appinfo
+        WHERE device = 2
+        ORDER BY id DESC LIMIT 1;
+    </select>
+
+    <select id="findPageByCondition" parameterType="com.loan.common.model.Appinfo"  resultMap="appinfoResultMap">
+        select
+        <include refid="selectClause" />
+        from dw_appinfo
+        <where>
+            <include refid="pageConditionWhereClause" />
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.loan.common.model.Appinfo">
+        update dw_appinfo set
+        <trim suffix="" suffixOverrides=",">
+            <include refid="updateClause" />
+        </trim>
+        where
+                `id` = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.loan.common.model.Appinfo">
+        insert into dw_appinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertClause"/>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="insertValues" />
+        </trim>
+    </insert>
+
+
+    <select id="count" parameterType="com.loan.common.model.Appinfo" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_appinfo
+    </select>
+
+    <select id="countByCondition" parameterType="com.loan.common.model.Appinfo" resultType="java.lang.Long">
+        select
+            count(*)
+        from dw_appinfo
+        <where>
+            <include refid="whereClause" />
+        </where>
+    </select>
+
+
+    <delete id="deleteById">
+        delete
+            from dw_appinfo
+        where
+            `id` = #{id}
+
+    </delete>
+
+</mapper>
